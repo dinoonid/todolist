@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import TodoForm from './TodoForm';
-import TodoInfos from './TodoInfos';
-import TodoList from './TodoList';
+import React, { Component } from "react";
+import TodoForm from "./TodoForm";
+import TodoInfos from "./TodoInfos";
+import TodoList from "./TodoList";
 
 class App extends Component {
   constructor(props) {
@@ -9,25 +9,22 @@ class App extends Component {
     this.state = {
       tasks: []
     };
-    this.changeTasks = this.changeTasks.bind(this);
   }
 
-  changeTasks(newTasks) {
-    this.setState({
-      tasks: [
-        ...this.state.tasks,
-        newTasks
-      ]
-    });
-    console.log(this.state.tasks);
-  }
+  changeTasks = newTasks => {
+    this.setState(prevState => ({
+      tasks: [...prevState.tasks, newTasks]
+    }));
+  };
 
   render() {
-    return (<div className="App">
-      <TodoInfos infosCount={this.state.tasks.length}/>
-      <TodoForm tasks={this.state.tasks} changeTasks={this.changeTasks}/>
-      <TodoList list={this.state.tasks}/>
-    </div>);
+    return (
+      <div className="App">
+        <TodoInfos infosCount={this.state.tasks.length} />
+        <TodoForm tasks={this.state.tasks} changeTasks={this.changeTasks} />
+        <TodoList list={this.state.tasks} />
+      </div>
+    );
   }
 }
 

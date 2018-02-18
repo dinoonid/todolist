@@ -1,32 +1,42 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
 class TodoForm extends Component {
   constructor() {
     super();
     this.state = {
-      text: ''
+      text: ""
     };
-    this.addTodo = this.addTodo.bind(this);
-    this.changeInput = this.changeInput.bind(this);
   }
 
-  addTodo(e) {
-    e.preventDefault();
-    const newTodo = this.state.text;
-    this.setState({text: ''});
-    this.props.changeTasks(newTodo);
+  addTodo = event => {
+    event.preventDefault();
+    if (this.state.text !== "") {
+      const newTodo = this.state.text;
+      this.setState({ text: "" });
+      this.props.changeTasks(newTodo);
+    }
+  };
+
+  changeInput = event => {
+    const reg = /^ /;
+    if (reg.test(event.target.value)) {
+      event.target.value = "";
+    }
+    this.setState({ text: event.target.value });
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.addTodo}>
+        <input
+          placeholder="Saisissez une tâche"
+          value={this.state.text}
+          onChange={this.changeInput}
+        />
+        <button>Valider</button>
+      </form>
+    );
   }
-
-changeInput(e) {
-  this.setState({text: e.target.value});
-}
-
-render() {
-  return (<form onSubmit={this.addTodo}>
-    <input placeholder='Saisissez une tâche' value={this.state.text} onChange={this.changeInput}/>
-    <button>Valider</button>
-  </form>);
-}
 }
 
 export default TodoForm;
