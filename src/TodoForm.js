@@ -11,7 +11,8 @@ class TodoForm extends Component {
   addTodo = event => {
     event.preventDefault();
     if (this.state.text !== "") {
-      const newTodo = this.state.text;
+      const newTodo =
+        this.state.text[0].toUpperCase() + this.state.text.slice(1);
       this.setState({ text: "" });
       this.props.changeTasks(newTodo);
     }

@@ -5,7 +5,7 @@ class TodoList extends Component {
     const theLists = this.props.list.map((theList, index) => {
       return (
         <li className="list" key={theList.toString() + index}>
-          {index + 1 + " • " + theList[0].toUpperCase() + theList.slice(1)}
+          {index + 1 + " • " + theList}
         </li>
       );
     });

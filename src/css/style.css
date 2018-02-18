@@ -64,6 +64,28 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 /* line 3, ../scss/style.scss */
+html {
+  line-height: 130%;
+}
+
+/* line 7, ../scss/style.scss */
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+/* line 12, ../scss/style.scss */
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* line 17, ../scss/style.scss */
+p {
+  margin-bottom: 2rem;
+}
+
+/* line 21, ../scss/style.scss */
 .App {
   font-family: sans-serif;
   color: purple;
