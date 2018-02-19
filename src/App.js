@@ -11,10 +11,38 @@ class App extends Component {
     };
   }
 
+  initiliseStorage = () => {
+    let Storage = window.localStorage;
+    if (!Storage.getItem("tasks")) {
+      Storage.setItem("tasks", JSON.stringify([]));
+    } else {
+      this.getStateFromStorage();
+    }
+  };
+
+  getStateFromStorage = () => {
+    let Storage = window.localStorage;
+    this.setState({ tasks: JSON.parse(Storage.getItem("tasks")) });
+  };
+
+  saveData = () => {
+    let Storage = window.localStorage;
+    Storage.setItem("tasks", JSON.stringify(this.state.tasks));
+  };
+
+  componentDidMount() {
+    this.initiliseStorage();
+  }
+
   changeTasks = newTasks => {
-    this.setState(prevState => ({
-      tasks: [...prevState.tasks, newTasks]
-    }));
+    this.setState(
+      prevState => ({
+        tasks: [...prevState.tasks, newTasks]
+      }),
+      () => {
+        this.saveData();
+      }
+    );
   };
 
   render() {
