@@ -95,3 +95,8 @@ p {
   border-radius: 25px;
   padding: 60px;
 }
+
+/* line 27, ../scss/style.scss */
+.bt-remove {
+  float: left;
+}

@@ -7,14 +7,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: []
+      tasks: [],
+      text: ""
     };
   }
+
+  componentDidMount = () => {
+    this.initiliseStorage();
+  };
 
   initiliseStorage = () => {
     let Storage = window.localStorage;
     if (!Storage.getItem("tasks")) {
-      Storage.setItem("tasks", JSON.stringify([]));
+      this.getStorageFromState();
     } else {
       this.getStateFromStorage();
     }
@@ -22,25 +27,56 @@ class App extends Component {
 
   getStateFromStorage = () => {
     let Storage = window.localStorage;
-    this.setState({ tasks: JSON.parse(Storage.getItem("tasks")) });
+    this.setState({
+      tasks: JSON.parse(Storage.getItem("tasks"))
+    });
   };
 
-  saveData = () => {
+  getStorageFromState = () => {
     let Storage = window.localStorage;
     Storage.setItem("tasks", JSON.stringify(this.state.tasks));
   };
 
-  componentDidMount() {
-    this.initiliseStorage();
-  }
+  addTodo = e => {
+    e.preventDefault();
+    if (this.state.text !== "") {
+      let newDate = Date.now();
+      const newTodo = {
+        task: this.state.text[0].toUpperCase() + this.state.text.slice(1),
+        key: newDate
+      };
+      this.setState(
+        {
+          tasks: [...this.state.tasks, newTodo],
+          text: ""
+        },
+        () => {
+          this.getStorageFromState();
+        }
+      );
+    }
+  };
 
-  changeTasks = newTasks => {
+  changeInput = e => {
+    const reg = /^ /;
+    if (reg.test(e.target.value)) {
+      e.target.value = "";
+    }
+    this.setState({ text: e.target.value });
+  };
+
+  removeTask = e => {
     this.setState(
-      prevState => ({
-        tasks: [...prevState.tasks, newTasks]
-      }),
+      {
+        tasks: this.state.tasks.filter(v => {
+          return (
+            this.state.tasks.indexOf(v) !==
+            Number(e.target.parentNode.dataset.key)
+          );
+        })
+      },
       () => {
-        this.saveData();
+        this.getStorageFromState();
       }
     );
   };
@@ -49,8 +85,16 @@ class App extends Component {
     return (
       <div className="App">
         <TodoInfos infosCount={this.state.tasks.length} />
-        <TodoForm tasks={this.state.tasks} changeTasks={this.changeTasks} />
-        <TodoList list={this.state.tasks} />
+        <TodoForm
+          tasks={this.state.tasks}
+          changeInput={e => this.changeInput(e)}
+          addTodo={e => this.addTodo(e)}
+          theValue={this.state.text}
+        />
+        <TodoList
+          list={this.state.tasks}
+          removeTask={e => this.removeTask(e)}
+        />
       </div>
     );
   }
