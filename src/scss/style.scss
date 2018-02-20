@@ -1,29 +1,120 @@
 @import "compass-library/compass-library";
 
+$grisTresClair: #f5f5f5;
+$grisClair: #eee;
+$grisFonce: #606060;
+$bleuClair: #cddfff;
+
 html {
+  font-family: sans-serif;
   line-height: 130%;
 }
 
-h1 {
-  font-size: 3rem;
-  margin-bottom: (3rem / 2);
+* {
+  box-sizing: border-box;
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: (2rem / 2);
+* {
+  @include input-placeholder {
+    color: $bleuClair;
+    font-style: italic;
+  }
 }
 
-p {
-  margin-bottom: (4rem / 2);
+/* line 21, ../scss/style.scss */
+
+.todo-heaver {
+  width: 500px;
+  margin: 20px auto;
+  text-align: left;
+  border: 1px solid $grisClair;
 }
 
-.App {
-  font-family: sans-serif;
-  @include dere;
-  padding: 60px;
+.TodoInfos {
+  background-color: $grisTresClair;
+  h2 {
+    color: $grisFonce;
+    padding-left: 16px;
+    font-size: 18px;
+    line-height: 40px;
+  }
+}
+
+.box-form {
+  position: relative;
+  height: 80px;
+}
+
+.input-task {
+  font-size: 18px;
+  width: 403px;
+  height: 50px;
+  margin: 15px;
+  padding: 0 0 0 14px;
+  border: 1px solid $grisClair;
+}
+
+.bt-valider {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #a2cd7c;
+}
+
+.one-list {
+  position: relative;
+  width: 500px;
+  margin: 10px auto;
+  height: 50px;
+  text-align: left;
+  border: 1px solid $grisClair;
+}
+
+.one-task {
+  color: $grisFonce;
+  font-size: 18px;
+  padding-left: 50px;
+  line-height: 50px;
+}
+
+/* line 27, ../scss/style.scss */
+
+.bt-remove,
+.bt-edit,
+.input-edit,
+.bt-valid-edit,
+.edit-state {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
 }
 
 .bt-remove {
-  float: left;
+  right: 15px;
+  background-color: $grisTresClair;
+}
+
+.bt-edit {
+  right: 45px;
+  background-color: $grisTresClair;
+}
+
+.bt-valid-edit {
+  display: none;
+  right: 80px;
+}
+
+.input-edit {
+  display: none;
+  right: 1000px;
+}
+
+.edit-state {
+  left: 15px;
+  background-color: $grisTresClair;
 }

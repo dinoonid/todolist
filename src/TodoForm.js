@@ -1,17 +1,20 @@
-import React, { Component } from "react";
+import React from "react";
 
-class TodoForm extends Component {
-  render() {
-    return (
-      <form onSubmit={e => this.props.addTodo(e)}>
+const TodoForm = props => {
+  const { addTodo, theValue, changeInput } = props;
+
+  return (
+    <div className="box-form">
+      <form onSubmit={e => addTodo(e)}>
         <input
+          className="input-task"
           placeholder="Saisissez une tâche"
-          value={this.props.theValue}
-          onChange={e => this.props.changeInput(e)}
+          value={theValue}
+          onChange={e => changeInput(e)}
         />
-        <button>Valider</button>
       </form>
-    );
-  }
-}
+      <div onClick={e => addTodo(e)} className="bt-valider" />
+    </div>
+  );
+};
 export default TodoForm;

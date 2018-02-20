@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 
-class TodoInfos extends Component {
-  oneOrMore = nb => {
+const TodoInfos = props => {
+  const { infosCount } = props;
+
+  const oneOrMore = nb => {
     return nb === 0 || nb === 1 ? "" : "s";
   };
 
-  render() {
-    const nbTasks = this.props.infosCount;
-    return (
+  return (
+    <div className="TodoInfos">
       <h2>
-        Vous avez {nbTasks} tâche{this.oneOrMore(nbTasks)}
+        Vous avez {infosCount} tâche{oneOrMore(infosCount)}
       </h2>
-    );
-  }
-}
-
+    </div>
+  );
+};
 export default TodoInfos;

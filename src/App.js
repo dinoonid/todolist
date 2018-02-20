@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import TodoForm from "./TodoForm";
-import TodoInfos from "./TodoInfos";
+import TodoHeader from "./TodoHeader";
 import TodoList from "./TodoList";
 
 class App extends Component {
@@ -40,10 +39,8 @@ class App extends Component {
   addTodo = e => {
     e.preventDefault();
     if (this.state.text !== "") {
-      let newDate = Date.now();
       const newTodo = {
-        task: this.state.text[0].toUpperCase() + this.state.text.slice(1),
-        key: newDate
+        task: this.state.text[0].toUpperCase() + this.state.text.slice(1)
       };
       this.setState(
         {
@@ -81,19 +78,22 @@ class App extends Component {
     );
   };
 
+  editTask = e => {
+    alert(e.target.parentNode.dataset.key);
+  };
+
   render() {
     return (
       <div className="App">
-        <TodoInfos infosCount={this.state.tasks.length} />
-        <TodoForm
-          tasks={this.state.tasks}
+        <TodoHeader
+          state={this.state}
           changeInput={e => this.changeInput(e)}
           addTodo={e => this.addTodo(e)}
-          theValue={this.state.text}
         />
         <TodoList
           list={this.state.tasks}
           removeTask={e => this.removeTask(e)}
+          editTask={e => this.editTask(e)}
         />
       </div>
     );
